@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.primary-color {
+  color: #FCA311;
+}
+
+.secondary-color {
+  color: #14213D;
+}
+
+.bg-secondary-color {
+  background-color: #14213D;
+}
+
+.bg-primary-color {
+  background-color: #FCA311;
+}
+
+
+.font-primary {
+  font-family: 'AdiHaus';
+}
+
+.font-secondary {
+  font-family: 'AdihausDin';
+}
+
+.animate-posters {
+  animation: images 40s linear infinite;
+}
+
+.animate-posters-reverse {
+  animation: images-reverse 40s linear infinite;
+}
+
+@keyframes images-reverse {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes images {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(50%);
+  }
+}
