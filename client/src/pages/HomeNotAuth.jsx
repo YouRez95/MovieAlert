@@ -6,7 +6,7 @@ import posterMovie3 from "../assets/poster-movie-3.png";
 import Layout from "../components/Layout";
 import { IoSearch } from "react-icons/io5";
 
-export default function Home() {
+export default function HomeNotAuth() {
   return (
     <main>
       <div className="w-full h-[480px] relative overflow-hidden">
