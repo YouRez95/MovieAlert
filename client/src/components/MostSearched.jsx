@@ -29,8 +29,11 @@ export default function MostSearched({ text }) {
       </div>
 
       <div className="flex overflow-x-auto justify-start items-center gap-4 h-[370px] px-10 -mt-9">
-        {posters.map((poster) => (
-          <div className="h-[70%] cursor-pointer hover:scale-125 transition-all duration-300 relative hover:z-10 group">
+        {posters.map((poster, i) => (
+          <div
+            key={i}
+            className="h-[70%] cursor-pointer hover:scale-125 transition-all duration-300 relative hover:z-10 group"
+          >
             <img
               src={poster}
               alt=""

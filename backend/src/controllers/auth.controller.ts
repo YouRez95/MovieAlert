@@ -26,7 +26,7 @@ export const registerHandler = catchErrors(async (req, res, next) => {
   const { user, accessToken, refreshToken } = await createAccount(requestData);
 
   // return response
-  return setAuthCookies({res, accessToken, refreshToken}).status(CREATED).json(user);
+  return setAuthCookies({res, accessToken, refreshToken}).status(CREATED).json({message: 'Register successfully',  user});
 })
 
 export const loginHandler = catchErrors(async (req, res) => {
@@ -38,7 +38,7 @@ export const loginHandler = catchErrors(async (req, res) => {
   const { user, accessToken, refreshToken } = await loginUser(requestData);
 
   // return response
-  return setAuthCookies({res, accessToken, refreshToken}).status(OK).json({message: 'Login successfully'});
+  return setAuthCookies({res, accessToken, refreshToken}).status(OK).json({message: 'Login successfully', user});
 })
 
 

@@ -10,7 +10,6 @@ const handleZodErrors = (res: Response, err: z.ZodError) => {
     message: issue.message
   }))
   return res.status(BAD_REQUEST).json({
-    message: "Register Failed",
     errors,
   })
 }

@@ -169,10 +169,16 @@ export const verifyEmail = async (code: string) => {
 
 
 export const sendPasswordResetEmail = async (email: string) => {
-  // get the user by email
-  const user = await UserModel.findOne({email});
-  appAssert(user, NOT_FOUND, 'User not found');
-
+  let user;
+  try {
+    // get the user by email
+    user = await UserModel.findOne({email});
+    appAssert(user, NOT_FOUND, 'User not found');
+  } catch (error:any) {
+    console.log("send forget password", error.message)
+    return {}
+  }
+  
   // Check email rate limit: we will allow the user to send two forgot password every five minute
   const fiveMinAgo = fiveMinuteAgo()
   const count = await VerificationCodeModel.countDocuments({
@@ -181,7 +187,7 @@ export const sendPasswordResetEmail = async (email: string) => {
     createdAt: { $gt : fiveMinAgo },
   })
   appAssert(count <= 1 , TOO_MANY_REQUESTS, "Too many requests, Try again later");
-
+  
   // Create Verification Code
   const expiresAt = oneHourFromNow();
   const verificationCode = await VerificationCodeModel.create({
@@ -189,7 +195,7 @@ export const sendPasswordResetEmail = async (email: string) => {
     type: VerificationCodeType.PasswordReset,
     expiresAt,
   })
-
+  
   // Send Verification Email
   const url = `${APP_ORIGIN}/password/reset?code=${verificationCode._id}&exp=${expiresAt.getTime()}`;
   const { data, error } = await sendMail({
@@ -197,7 +203,7 @@ export const sendPasswordResetEmail = async (email: string) => {
     ...getPasswordResetTemplate(url)
   });
   appAssert(data?.id, INTERNAL_SERVER_ERROR, `${error?.name} - ${error?.message}`);
-
+  
   // Return
   return {url, emailId: data.id}
 }

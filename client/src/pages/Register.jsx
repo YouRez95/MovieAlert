@@ -7,30 +7,50 @@ import { GoEye } from "react-icons/go";
 import { GoEyeClosed } from "react-icons/go";
 import leftArrow from "../assets/Simple-Left.png";
 import MoviesAnimation from "../components/MoviesAnimation";
+import usePasswordValidation from "../hooks/usePaswordValidation";
+import { isEmail } from "../utils/isEmail";
+import { useMutation } from "@tanstack/react-query";
+import { register } from "../lib/api";
+import { useUser } from "../context.js/UserContext";
+import { LiaSpinnerSolid } from "react-icons/lia";
 
 export default function Register() {
-  const [typePassword, setTypePassword] = useState("password");
-  const [passwordLength, setPasswordLength] = useState(false);
-  const [passwordLetters, setPasswordLetters] = useState(false);
+  const { loginUser } = useUser();
+  const {
+    changeType,
+    passwordLength,
+    passwordLetters,
+    typePassword,
+    validatePassword,
+  } = usePasswordValidation();
 
-  function validatePassword(e) {
-    const password = e.target.value;
-    if (password.length > 8) {
-      setPasswordLength(true);
-    } else {
-      setPasswordLength(false);
-    }
+  const [formData, setFormData] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    password: "",
+  });
 
-    const pattern = new RegExp(
-      "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[-+_!@#$%^&*.,?]).+$"
-    );
+  const formDataHandler = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
-    if (pattern.test(password)) {
-      setPasswordLetters(true);
-    } else {
-      setPasswordLetters(false);
-    }
-  }
+  const {
+    mutate: createAccount,
+    isPending,
+    isError,
+    error,
+  } = useMutation({
+    mutationFn: register,
+    onSuccess: (data) => {
+      // set the user context with data
+      loginUser(data.user);
+      navigate("/", { replace: true });
+    },
+  });
 
   return (
     <div className="flex justify-start items-start h-[100vh]">
@@ -54,10 +74,19 @@ export default function Register() {
           </p>
         </div>
 
-        <Form method="POST" className="flex flex-col gap-5">
+        <form className="flex flex-col gap-5">
+          <span
+            className={`text-red-500 text-center font-secondary -mt-5 ${
+              isError ? "visible" : "invisible"
+            }`}
+          >
+            {error?.message || error?.errors[0].message || "An error Occurred"}
+          </span>
           <input
             type="email"
             name="email"
+            value={formData.email}
+            onChange={formDataHandler}
             required
             placeholder="email address"
             className="outline-none border-[1.5px] border-[#14213D] py-2 px-2 font-secondary"
@@ -65,6 +94,8 @@ export default function Register() {
           <input
             type="text"
             name="firstName"
+            value={formData.firstName}
+            onChange={formDataHandler}
             required
             placeholder="First Name"
             className="outline-none border-[1.5px] border-[#14213D] py-2 px-2 font-secondary"
@@ -72,6 +103,8 @@ export default function Register() {
           <input
             type="text"
             name="lastName"
+            value={formData.lastName}
+            onChange={formDataHandler}
             required
             placeholder="Last Name"
             className="outline-none border-[1.5px] border-[#14213D] py-2 px-2 font-secondary"
@@ -80,21 +113,26 @@ export default function Register() {
             <input
               type={typePassword}
               name="password"
+              value={formData.password}
               required
               placeholder="Password"
               className="outline-none border-[1.5px] border-[#14213D] py-2 px-2 font-secondary w-full"
-              onChange={validatePassword}
+              onChange={(e) => {
+                validatePassword(e);
+                formDataHandler(e);
+              }}
+              onKeyDown={(e) => e.key === "Enter" && createAccount(formData)}
             />
             {typePassword === "password" && (
               <GoEyeClosed
                 className="absolute right-5 select-none cursor-pointer top-[50%] -translate-y-[50%] w-6 h-6"
-                onClick={() => setTypePassword("text")}
+                onClick={() => changeType("text")}
               />
             )}
             {typePassword === "text" && (
               <GoEye
                 className="absolute right-5 select-none cursor-pointer top-[50%] -translate-y-[50%] w-6 h-6"
-                onClick={() => setTypePassword("password")}
+                onClick={() => changeType("password")}
               />
             )}
           </div>
@@ -110,12 +148,23 @@ export default function Register() {
           </div>
 
           <button
-            type="submit"
-            className="bg-secondary-color primary-color py-2 mt-4 font-primary"
+            type="button"
+            className="bg-secondary-color primary-color py-2 mt-4 font-primary disabled:bg-[#14213dbb]"
+            disabled={
+              !passwordLength ||
+              !passwordLetters ||
+              !isEmail(formData.email) ||
+              !Object.values(formData).every(Boolean)
+            }
+            onClick={() => createAccount(formData)}
           >
-            Sign Up
+            {isPending ? (
+              <LiaSpinnerSolid className="m-auto animate-spin w-6 h-6" />
+            ) : (
+              "Create account"
+            )}
           </button>
-        </Form>
+        </form>
 
         <div className="bg-[#384154] h-[.5px]" />
 
@@ -133,18 +182,4 @@ export default function Register() {
       </div>
     </div>
   );
-}
-
-export async function action({ request, params }) {
-  const data = await request.formData();
-  const userCredentials = {
-    email: data.get("email"),
-    firstName: data.get("firstName"),
-    lastName: data.get("lastName"),
-    password: data.get("password"),
-  };
-
-  console.log(userCredentials);
-  // send the data to the backend
-  return null;
 }
