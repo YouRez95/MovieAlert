@@ -4,6 +4,7 @@ import { z } from "zod";
 import AppError from "../utils/AppError";
 import { REFRESH_TOKEN_PATH, clearAuthCookies } from "../utils/cookies";
 
+
 const handleZodErrors = (res: Response, err: z.ZodError) => {
   const errors = err.issues.map(issue => ({
     path: issue.path.join("."),

@@ -9,11 +9,9 @@ import { UserProvider } from "./context.js/UserContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <UserProvider>
-      <QueryClientProvider client={queryClient}>
-        <App />
-        <ReactQueryDevtools position="bottom-right" initialIsOpen={true} />
-      </QueryClientProvider>
-    </UserProvider>
+    <QueryClientProvider client={queryClient}>
+      <App />
+      <ReactQueryDevtools position="bottom-right" initialIsOpen={true} />
+    </QueryClientProvider>
   </React.StrictMode>
 );

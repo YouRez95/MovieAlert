@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useUser } from "../context.js/UserContext";
+import useAuth from "../hooks/useAuth";
 
 export default function HiddenPages() {
-  const { user } = useUser();
-  return !user ? <Outlet /> : <Navigate to="/" />;
+  const { user, isPending } = useAuth();
+  return isPending ? "Loading" : !user ? <Outlet /> : <Navigate to="/" />;
 }

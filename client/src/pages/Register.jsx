@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Link } from "react-router-dom";
+import { Form, Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { IoCheckmarkOutline } from "react-icons/io5";
 import { BsX } from "react-icons/bs";
@@ -11,11 +11,10 @@ import usePasswordValidation from "../hooks/usePaswordValidation";
 import { isEmail } from "../utils/isEmail";
 import { useMutation } from "@tanstack/react-query";
 import { register } from "../lib/api";
-import { useUser } from "../context.js/UserContext";
 import { LiaSpinnerSolid } from "react-icons/lia";
 
 export default function Register() {
-  const { loginUser } = useUser();
+  const navigate = useNavigate();
   const {
     changeType,
     passwordLength,
@@ -45,9 +44,7 @@ export default function Register() {
     error,
   } = useMutation({
     mutationFn: register,
-    onSuccess: (data) => {
-      // set the user context with data
-      loginUser(data.user);
+    onSuccess: () => {
       navigate("/", { replace: true });
     },
   });

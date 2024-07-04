@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
 import HomeNotAuth from "../pages/HomeNotAuth";
-import { useUser } from "../context.js/UserContext";
+import useAuth from "../hooks/useAuth";
 
 export default function ProtectedHome() {
-  const { user } = useUser();
+  const { user, isPending } = useAuth();
 
-  return user ? <Outlet /> : <HomeNotAuth />;
+  return isPending ? "Loading" : user ? <Outlet /> : <HomeNotAuth />;
 }

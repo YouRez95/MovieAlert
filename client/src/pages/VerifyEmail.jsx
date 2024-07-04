@@ -5,23 +5,15 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import { FaRegCircleXmark } from "react-icons/fa6";
 import { ImSpinner2 } from "react-icons/im";
 import leftArrow from "../assets/Simple-Left.png";
-import { useEffect } from "react";
-import { useUser } from "../context.js/UserContext";
 
 export default function VerifyEmail() {
   const { code } = useParams();
-  const { isVerified } = useUser();
 
   const { isPending, isError, isSuccess } = useQuery({
     queryKey: ["emailVerification", code],
     queryFn: () => verifyEmail(code),
   });
 
-  useEffect(() => {
-    if (isSuccess) {
-      isVerified();
-    }
-  }, [isSuccess]);
   return (
     <div className="w-[100vw] h-[100vh] bg-secondary-color primary-color flex justify-center items-center flex-col text-center">
       {isPending ? (

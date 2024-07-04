@@ -3,6 +3,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
+
 import connectToDatabse from './config/db';
 import { APP_ORIGIN, NODE_ENV, PORT } from './constants/env';
 import errorHandler from './middleware/errorHandler';
@@ -11,6 +12,7 @@ import authRoutes from './routes/auth.route';
 import { authenticate } from './middleware/authenticate';
 import userRoutes from './routes/user.route';
 import sessionRoutes from './routes/session.route';
+import moviesRoutes from './routes/movie.route';
 
 
 const app = express();
@@ -37,6 +39,7 @@ app.use('/auth', authRoutes);
 app.use('/user', authenticate, userRoutes);
 
 app.use('/sessions', authenticate, sessionRoutes);
+app.use('/movies', authenticate, moviesRoutes);
 
 // Error Middleware
 app.use(errorHandler);

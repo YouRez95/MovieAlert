@@ -1,5 +1,5 @@
 import { useState } from "react";
-export default function InputMovie({ text }) {
+export default function InputMovie({ text, value, name, onChange }) {
   const [focusInput, setFocusInput] = useState(false);
 
   function handleBlurInput(e) {
@@ -8,7 +8,7 @@ export default function InputMovie({ text }) {
     }
   }
   return (
-    <div className="relative">
+    <div className="relative h-fit">
       <span
         className={`font-secondary absolute transition-all -translate-y-[50%] left-3 text-gray-400 px-2 bg-white ${
           focusInput ? "top-0 z-10" : "top-[50%]"
@@ -18,9 +18,12 @@ export default function InputMovie({ text }) {
       </span>
       <input
         type="text"
-        className="border w-full h-12 outline-none px-3 text-xl bg-transparent relative"
+        value={value}
+        name={name}
+        className="border w-full h-12 outline-none px-3 text-base bg-transparent relative"
         onFocus={() => setFocusInput(true)}
         onBlur={handleBlurInput}
+        onChange={onChange}
       />
     </div>
   );

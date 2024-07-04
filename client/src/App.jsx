@@ -1,5 +1,4 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import HomeNotAuth from "./pages/HomeNotAuth";
 import LoginPage from "./pages/LoginPage";
 import Register from "./pages/Register";
 import ProtectedRoutes from "./components/ProtectedRoutes";
@@ -13,6 +12,8 @@ import NotFound from "./pages/NotFound";
 import VerifyEmail from "./pages/VerifyEmail";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import { useEffect } from "react";
+import { refetchUserData } from "./utils/auth";
 
 const router = createBrowserRouter([
   {
@@ -49,5 +50,9 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
+  useEffect(() => {
+    refetchUserData();
+  }, []);
+
   return <RouterProvider router={router} />;
 }

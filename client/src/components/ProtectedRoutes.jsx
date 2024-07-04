@@ -1,8 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useUser } from "../context.js/UserContext";
+import useAuth from "../hooks/useAuth";
 
 export default function ProtectedRoutes() {
-  const { user } = useUser();
+  const { user, isPending } = useAuth();
 
-  return user ? <Outlet /> : <Navigate to="/login" />;
+  return isPending ? "Loading" : user ? <Outlet /> : <Navigate to="/login" />;
 }

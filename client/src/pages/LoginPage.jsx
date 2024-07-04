@@ -6,11 +6,9 @@ import { LiaSpinnerSolid } from "react-icons/lia";
 import leftArrow from "../assets/Simple-Left.png";
 import MoviesAnimation from "../components/MoviesAnimation";
 import { login } from "../lib/api";
-import { useUser } from "../context.js/UserContext";
 import { isEmail } from "../utils/isEmail";
 
 export default function LoginPage() {
-  const { loginUser } = useUser();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,9 +19,7 @@ export default function LoginPage() {
     isError,
   } = useMutation({
     mutationFn: login,
-    onSuccess: (data) => {
-      // set the user context with data
-      loginUser(data.user);
+    onSuccess: () => {
       navigate("/", { replace: true });
     },
   });
