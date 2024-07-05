@@ -72,13 +72,13 @@ export default function Register() {
         </div>
 
         <form className="flex flex-col gap-5">
-          <span
+          {/* <span
             className={`text-red-500 text-center font-secondary -mt-5 ${
               isError ? "visible" : "invisible"
             }`}
           >
-            {error?.message || error?.errors[0].message || "An error Occurred"}
-          </span>
+            {isError && error?.message || error?.errors[0].message || "An error Occurred"}
+          </span> */}
           <input
             type="email"
             name="email"

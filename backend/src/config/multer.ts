@@ -1,16 +1,16 @@
-import multer from 'multer';
+import { Request } from 'express';
+import multer, { memoryStorage, MulterError } from 'multer';
 import path from 'path'
+import { BAD_REQUEST } from '../constants/http';
 
-// Set up storage configuration
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, '../../upload')); 
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  }
-});
-
-const upload = multer({ storage: storage });
+const upload = multer({ storage: memoryStorage(), fileFilter: (req:Request, file: Express.Multer.File, cb:multer.FileFilterCallback) => {
+  if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+    cb(null, true);
+  } else {
+    const error = new MulterError("LIMIT_UNEXPECTED_FILE")
+    error.message = 'Invalid image type. Please upload an image file (jpeg, png, or jpg).'
+    return cb(error);
+}
+}});
 
 export default upload;

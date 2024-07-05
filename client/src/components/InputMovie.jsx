@@ -1,5 +1,5 @@
 import { useState } from "react";
-export default function InputMovie({ text, value, name, onChange }) {
+export default function InputMovie({ text, value, name, type, onChange }) {
   const [focusInput, setFocusInput] = useState(false);
 
   function handleBlurInput(e) {
@@ -17,7 +17,7 @@ export default function InputMovie({ text, value, name, onChange }) {
         {text}
       </span>
       <input
-        type="text"
+        type={type}
         value={value}
         name={name}
         className="border w-full h-12 outline-none px-3 text-base bg-transparent relative"

@@ -13,8 +13,11 @@ import {
 } from "../data/contentWarning";
 import { useMutation } from "@tanstack/react-query";
 import { postMovie } from "../lib/api";
+import { LiaSpinnerSolid } from "react-icons/lia";
+import { useNavigate } from "react-router-dom";
 
 export default function AddMovie() {
+  const navigate = useNavigate()
   const [contentWarning, setContentWarning] = useState([]);
   const [inputsData, setInputsData] = useState({
     title: "",
@@ -24,6 +27,7 @@ export default function AddMovie() {
   });
   const [image, setImage] = useState(null);
   const [movieImage, setMovieImage] = useState(null);
+  const [errorForm, setErrorForm] = useState('')
 
   function contentSelectedHandler(e) {
     const value = e.target.innerText;
@@ -49,18 +53,31 @@ export default function AddMovie() {
     }));
   }
 
-  const { mutate: addMovieHandler } = useMutation({
+  const { mutate: addMovieHandler, isError, error, isPending, isSuccess } = useMutation({
     mutationFn: postMovie,
+    onSuccess: () => {
+      setTimeout(() => {
+        navigate('/');
+      }, 2000)
+    }
   });
 
   function submitFormHandler(e) {
     e.preventDefault();
-    console.log(e.target);
+    if (!Object.values(inputsData).every(Boolean) || !image || !movieImage) {
+      setErrorForm('title, year, genre, description and image are required')
+      return;
+    }
+    console.log(movieImage);
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+    if (!allowedTypes.includes(movieImage.type)) {
+      setErrorForm('Invalid image type. Please upload an image file (jpeg, png, or jpg).')
+      return;
+    }
+    setErrorForm('')
     const formData = new FormData(e.target);
     formData.append("movieImage", movieImage);
-    formData.append("contenntWarning", contentWarning);
-    // console.log(Object.fromEntries(formData.entries()));
-    // console.log(formData);
+    formData.append("contentWarning", contentWarning);
     addMovieHandler(formData);
   }
 
@@ -78,18 +95,21 @@ export default function AddMovie() {
           <div className="md:flex justify-between">
             <div className="flex-1 grid gap-5 h-fit">
               <InputMovie
+                type="text"
                 text="Movie Title"
                 name="title"
                 value={inputsData.title}
                 onChange={inputDataHandler}
               />
               <InputMovie
+                type="number"
                 name="year"
                 text="Release Year"
                 value={inputsData.year}
                 onChange={inputDataHandler}
               />
               <InputMovie
+                type="text"
                 name="genre"
                 text="Genre"
                 value={inputsData.genre}
@@ -206,11 +226,19 @@ export default function AddMovie() {
             className="border p-2 resize-none outline-none"
           ></textarea>
 
+          {(errorForm || isError) && (
+            <span className="text-red-500 text-center font-secondary">
+              {errorForm || error?.message || error?.errors[0].message || "Error Occured"}
+            </span>
+          )}
           <button
             type="submit"
             className="mr-auto bg-secondary-color ml-5 primary-color py-2 px-7 mt-7 rounded-lg"
+            disabled={isPending || isSuccess}
           >
-            Add Movie
+            {isPending ? (
+              <LiaSpinnerSolid className="m-auto animate-spin w-6 h-6" />
+            ) : "Add Movie" }
           </button>
         </form>
       </div>
