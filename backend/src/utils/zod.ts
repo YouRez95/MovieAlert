@@ -19,8 +19,23 @@ export const registerSchema = loginSchema.extend({
 
 
 export const verificationCodeSchema = z.string().min(1).max(24);
+export const movieTitleSchema = z.string().min(1).max(24);
 
 export const resetPasswordSchema = z.object({
   password: passwordSchema,
   verificationCode: verificationCodeSchema,
+})
+
+
+export const movieSchema = z.object({
+  title: z.string().min(1, "title is required").max(255),
+  year: z.string().min(1, "Year is required").max(255),
+  genre: z.string().min(1, "Genre is required").max(255),
+  contentWarning: z.array(z.string()).optional(),
+  description: z.string().min(1, "description is required"),
+})
+
+export const aboutMovieSchema = z.object({
+  movieId: z.string().min(1).max(24),
+  movieName: z.string().min(1).max(255),
 })

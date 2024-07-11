@@ -17,7 +17,7 @@ export interface MovieDocument extends mongoose.Document {
 
 const movieSchema = new mongoose.Schema<MovieDocument>({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', index: true, required: true},
-  title: {type: String, required: true},
+  title: {type: String, required: true, index: true},
   year: {type: String, required: true},
   genre: {type: String, required: true},
   picture: {type: String, required: true},

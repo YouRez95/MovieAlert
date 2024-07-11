@@ -13,6 +13,8 @@ import { authenticate } from './middleware/authenticate';
 import userRoutes from './routes/user.route';
 import sessionRoutes from './routes/session.route';
 import moviesRoutes from './routes/movie.route';
+import client from './config/redis';
+import oauthRoutes from './routes/oauth.route';
 
 
 const app = express();
@@ -40,6 +42,7 @@ app.use('/user', authenticate, userRoutes);
 
 app.use('/sessions', authenticate, sessionRoutes);
 app.use('/movies', authenticate, moviesRoutes);
+app.use('/oauth', oauthRoutes);
 
 // Error Middleware
 app.use(errorHandler);
@@ -47,4 +50,5 @@ app.use(errorHandler);
 app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT} in ${NODE_ENV} environment`);
   await connectToDatabse();
+  await client.connect();
 })

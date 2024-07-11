@@ -35,6 +35,10 @@
   animation: images-reverse 40s linear infinite;
 }
 
+.height-screen {
+  height: calc(100vh - 70px);
+}
+
 @keyframes images-reverse {
   from {
     transform: translateY(0%);

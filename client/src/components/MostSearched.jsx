@@ -1,24 +1,7 @@
 import arrowImg from "../assets/Simple-Left.png";
-import poster1 from "../assets/poster-movie-1.png";
-import poster2 from "../assets/poster-movie-2.png";
-import poster3 from "../assets/poster-movie-3.png";
-import poster4 from "../assets/poster-movie-4.png";
-import poster5 from "../assets/poster-movie-5.png";
+import { Link } from "react-router-dom";
 
-const posters = [
-  poster1,
-  poster2,
-  poster3,
-  poster4,
-  poster5,
-  poster1,
-  poster2,
-  poster3,
-  poster4,
-  poster5,
-];
-
-export default function MostSearched({ text }) {
+export default function MostSearched({ text, movies }) {
   return (
     <div className="">
       <div className="flex items-center justify-start gap-3">
@@ -29,20 +12,21 @@ export default function MostSearched({ text }) {
       </div>
 
       <div className="flex overflow-x-auto justify-start items-center gap-4 h-[370px] px-10 -mt-9">
-        {posters.map((poster, i) => (
-          <div
-            key={i}
+        {movies.map((movie) => (
+          <Link
+            to={`movie/${movie._id}/${movie.title}`}
+            key={movie._id}
             className="h-[70%] cursor-pointer hover:scale-125 transition-all duration-300 relative hover:z-10 group"
           >
             <img
-              src={poster}
+              src={movie.picture}
               alt=""
               className="w-full h-full min-w-[200px] object-cover rounded-md"
             />
             <h2 className="absolute bottom-0 bg-primary-color text-center font-primary rounded-b-md ">
-              The Shawshank Redemption
+              {movie.title}
             </h2>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

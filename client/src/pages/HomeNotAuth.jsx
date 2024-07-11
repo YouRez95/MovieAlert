@@ -5,8 +5,14 @@ import posterMovie2 from "../assets/poster-movie-2.png";
 import posterMovie3 from "../assets/poster-movie-3.png";
 import Layout from "../components/Layout";
 import { IoSearch } from "react-icons/io5";
+import { ClientJS } from "clientjs";
 
 export default function HomeNotAuth() {
+  const client = new ClientJS();
+  const fingerPrint = client.getFingerprint();
+  console.log(fingerPrint);
+  // 1952026382
+
   return (
     <main>
       <div className="w-full h-[480px] relative overflow-hidden">

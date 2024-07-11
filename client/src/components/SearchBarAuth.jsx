@@ -1,8 +1,10 @@
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { MdClear } from "react-icons/md";
 import { RiMovie2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { getSearchMovie } from "../lib/api";
 
 const movies = [
   "The Shawshank Redemption",
@@ -61,15 +63,18 @@ const moviesLowercase = movies.map((movie) => movie.toLowerCase());
 export default function SearchBarAuth() {
   const [searchMovie, setSearchMovie] = useState("");
   const [resultSearch, setResultSearch] = useState([]);
+  const { mutate: getMovies } = useMutation({
+    mutationKey: ["search_movies", searchMovie],
+    mutationFn: getSearchMovie,
+    onSuccess: (data) => setResultSearch(data),
+    onError: () => setResultSearch([]),
+  });
 
   function handleChangeMovieName(e) {
     setSearchMovie(e.target.value);
     if (e.target.value.length > 0) {
-      setResultSearch(
-        moviesLowercase.filter((movie) =>
-          movie.startsWith(e.target.value.toLowerCase())
-        )
-      );
+      // Get the movie from the cache
+      getMovies(e.target.value);
     } else {
       setResultSearch([]);
     }
@@ -101,11 +106,12 @@ export default function SearchBarAuth() {
         <div className="w-[49%] mt-1 bg-white shadow-md py-2 px-2 rounded-lg max-h-[37vh] overflow-y-auto absolute top-[60px]">
           {resultSearch.map((movie) => (
             <Link
-              to={`movie/${movie.split(" ").join("-")}`}
+              key={movie.id}
+              to={`movie/${movie.id}/${movie.movieName}`}
               className="w-full flex items-center gap-2 text-xl rounded-lg px-4 py-2 cursor-pointer hover:bg-slate-200 border-b"
             >
               <RiMovie2Line className="primary-color" />
-              <span>{movie}</span>
+              <span>{movie.movieName}</span>
             </Link>
           ))}
         </div>

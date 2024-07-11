@@ -7,6 +7,7 @@ import leftArrow from "../assets/Simple-Left.png";
 import MoviesAnimation from "../components/MoviesAnimation";
 import { login } from "../lib/api";
 import { isEmail } from "../utils/isEmail";
+import getGoogleOAuthURL from "../utils/getGoogleUrl";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -92,10 +93,13 @@ export default function LoginPage() {
 
         <div className="bg-[#384154] h-[.5px]" />
 
-        <button className="secondary-color flex justify-center items-center gap-2 py-2 font-primary border border-[#384154]">
+        <Link
+          to={getGoogleOAuthURL()}
+          className="secondary-color flex justify-center items-center gap-2 py-2 font-primary border border-[#384154]"
+        >
           <FcGoogle className="mb-[3px]" />
           Sign in with google
-        </button>
+        </Link>
 
         <span>
           New to <span className="font-primary">MovieAlert</span>?{" "}

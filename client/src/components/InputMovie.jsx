@@ -11,7 +11,7 @@ export default function InputMovie({ text, value, name, type, onChange }) {
     <div className="relative h-fit">
       <span
         className={`font-secondary absolute transition-all -translate-y-[50%] left-3 text-gray-400 px-2 bg-white ${
-          focusInput ? "top-0 z-10" : "top-[50%]"
+          focusInput || value ? "top-0 z-10" : "top-[50%]"
         }`}
       >
         {text}

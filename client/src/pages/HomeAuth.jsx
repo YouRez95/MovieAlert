@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../components/Layout";
 import Navbar from "../components/Navbar";
 import SearchBarAuth from "../components/SearchBarAuth";
-import MostSearched from "../components/MostSearched";
+import NewMostMovies from "../components/NewMostMovies";
 export default function HomeAuth() {
   return (
     <Layout>
@@ -11,8 +11,7 @@ export default function HomeAuth() {
       <SearchBarAuth />
 
       <div className="mt-20">
-        <MostSearched text="Most Searched" />
-        <MostSearched text="New Added" />
+        <NewMostMovies />
       </div>
     </Layout>
   );

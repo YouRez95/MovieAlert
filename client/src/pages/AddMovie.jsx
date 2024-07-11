@@ -1,7 +1,6 @@
 import InputMovie from "../components/InputMovie";
 import Layout from "../components/Layout";
 import Navbar from "../components/Navbar";
-import { LuImagePlus } from "react-icons/lu";
 import { FcAddImage } from "react-icons/fc";
 import Button from "../components/Button";
 import { useState } from "react";
@@ -15,9 +14,10 @@ import { useMutation } from "@tanstack/react-query";
 import { postMovie } from "../lib/api";
 import { LiaSpinnerSolid } from "react-icons/lia";
 import { useNavigate } from "react-router-dom";
+import { FaCheckCircle } from "react-icons/fa";
 
 export default function AddMovie() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [contentWarning, setContentWarning] = useState([]);
   const [inputsData, setInputsData] = useState({
     title: "",
@@ -27,7 +27,7 @@ export default function AddMovie() {
   });
   const [image, setImage] = useState(null);
   const [movieImage, setMovieImage] = useState(null);
-  const [errorForm, setErrorForm] = useState('')
+  const [errorForm, setErrorForm] = useState("");
 
   function contentSelectedHandler(e) {
     const value = e.target.innerText;
@@ -53,28 +53,35 @@ export default function AddMovie() {
     }));
   }
 
-  const { mutate: addMovieHandler, isError, error, isPending, isSuccess } = useMutation({
+  const {
+    mutate: addMovieHandler,
+    isError,
+    error,
+    isPending,
+    isSuccess,
+  } = useMutation({
     mutationFn: postMovie,
     onSuccess: () => {
       setTimeout(() => {
-        navigate('/');
-      }, 2000)
-    }
+        navigate("/");
+      }, 2000);
+    },
   });
 
   function submitFormHandler(e) {
     e.preventDefault();
     if (!Object.values(inputsData).every(Boolean) || !image || !movieImage) {
-      setErrorForm('title, year, genre, description and image are required')
+      setErrorForm("title, year, genre, description and image are required");
       return;
     }
-    console.log(movieImage);
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+    const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
     if (!allowedTypes.includes(movieImage.type)) {
-      setErrorForm('Invalid image type. Please upload an image file (jpeg, png, or jpg).')
+      setErrorForm(
+        "Invalid image type. Please upload an image file (jpeg, png, or jpg)."
+      );
       return;
     }
-    setErrorForm('')
+    setErrorForm("");
     const formData = new FormData(e.target);
     formData.append("movieImage", movieImage);
     formData.append("contentWarning", contentWarning);
@@ -228,18 +235,34 @@ export default function AddMovie() {
 
           {(errorForm || isError) && (
             <span className="text-red-500 text-center font-secondary">
-              {errorForm || error?.message || error?.errors[0].message || "Error Occured"}
+              {errorForm ||
+                error?.message ||
+                error?.errors[0].message ||
+                "Error Occured"}
             </span>
           )}
-          <button
-            type="submit"
-            className="mr-auto bg-secondary-color ml-5 primary-color py-2 px-7 mt-7 rounded-lg"
-            disabled={isPending || isSuccess}
-          >
-            {isPending ? (
-              <LiaSpinnerSolid className="m-auto animate-spin w-6 h-6" />
-            ) : "Add Movie" }
-          </button>
+          {!isSuccess && (
+            <button
+              type="submit"
+              className="mr-auto bg-secondary-color ml-5 primary-color py-2 px-7 mt-7 rounded-lg"
+              disabled={isPending || isSuccess}
+            >
+              {isPending ? (
+                <LiaSpinnerSolid className="m-auto animate-spin w-6 h-6" />
+              ) : (
+                "Add Movie"
+              )}
+            </button>
+          )}
+          {isSuccess && (
+            <button
+              className="mr-auto bg-green-700 text-white font-secondary ml-5 py-2 px-7 mt-7 rounded-lg flex items-center justify-center gap-2"
+              disabled
+            >
+              <FaCheckCircle className="" />
+              Movie Created Succesfully...
+            </button>
+          )}
         </form>
       </div>
     </Layout>

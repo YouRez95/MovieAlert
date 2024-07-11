@@ -14,6 +14,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import { useEffect } from "react";
 import { refetchUserData } from "./utils/auth";
+import EditMovie from "./pages/EditMovie";
 
 const router = createBrowserRouter([
   {
@@ -36,7 +37,8 @@ const router = createBrowserRouter([
     children: [
       { path: "/profile", element: <Profile /> },
       { path: "/add-movie", element: <AddMovie /> },
-      { path: "/movie/:movieName", element: <AboutMovie /> },
+      { path: "/edit-movie/:id/:movieName", element: <EditMovie /> },
+      { path: "/movie/:id/:movieName", element: <AboutMovie /> },
     ],
   },
   {
@@ -50,9 +52,9 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  useEffect(() => {
-    refetchUserData();
-  }, []);
+  // useEffect(() => {
+  //   refetchUserData();
+  // }, []);
 
   return <RouterProvider router={router} />;
 }
