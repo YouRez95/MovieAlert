@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 console.log("APP_ORIGIN", APP_ORIGIN)
 app.use(cors({
-  origin: APP_ORIGIN,
+  origin: "https://moviealert.onrender.com",
   credentials: true,
 }))
 app.use(cookieParser());
