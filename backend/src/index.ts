@@ -21,9 +21,8 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-console.log("APP_ORIGIN", APP_ORIGIN)
 app.use(cors({
-  origin: "https://movie-alert.com",
+  origin: APP_ORIGIN,
   credentials: true,
 }))
 app.use(cookieParser());
