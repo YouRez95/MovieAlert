@@ -7,6 +7,7 @@ exports.authenticate = void 0;
 const appAssert_1 = __importDefault(require("../utils/appAssert"));
 const http_1 = require("../constants/http");
 const jwt_1 = require("../utils/jwt");
+const session_model_1 = __importDefault(require("../models/session.model"));
 const catchErrors_1 = __importDefault(require("../utils/catchErrors"));
 exports.authenticate = (0, catchErrors_1.default)(async (req, res, next) => {
     // Get the access token
@@ -16,8 +17,8 @@ exports.authenticate = (0, catchErrors_1.default)(async (req, res, next) => {
     const { error, payload } = (0, jwt_1.verifyToken)(accessToken);
     (0, appAssert_1.default)(payload, http_1.UNAUTHORIZED, error === 'jwt expired' ? 'Token expired' : 'Invalid Token', "invalidAccessToken" /* AppErrorCode.InvalidAccessToken */);
     // Check for the session
-    // const sessionFound = await SessionModel.exists({_id: payload.sessionId});
-    // appAssert(sessionFound, UNAUTHORIZED, "Session Not found")
+    const sessionFound = await session_model_1.default.exists({ _id: payload.sessionId });
+    (0, appAssert_1.default)(sessionFound, http_1.UNAUTHORIZED, "Session Not found");
     // Store the user on the request
     req.userId = payload.userId;
     req.sessionId = payload.sessionId;
