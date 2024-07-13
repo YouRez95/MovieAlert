@@ -17,8 +17,8 @@ export const authenticate:RequestHandler = catchErrors(async (req, res, next) =>
   appAssert(payload, UNAUTHORIZED, error === 'jwt expired' ? 'Token expired' : 'Invalid Token', AppErrorCode.InvalidAccessToken);
   
   // Check for the session
-  const sessionFound = await SessionModel.exists({_id: payload.sessionId});
-  appAssert(sessionFound, UNAUTHORIZED, "Session Not found")
+  // const sessionFound = await SessionModel.exists({_id: payload.sessionId});
+  // appAssert(sessionFound, UNAUTHORIZED, "Session Not found")
   
   // Store the user on the request
   req.userId = payload.userId;
