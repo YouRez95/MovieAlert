@@ -21,8 +21,17 @@ const oauth_route_1 = __importDefault(require("./routes/oauth.route"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
+const allowedOrigins = [env_1.APP_ORIGIN, env_1.APP_ORIGIN_WWW];
 app.use((0, cors_1.default)({
-    origin: env_1.APP_ORIGIN,
+    origin: (origin, callback) => {
+        if (!origin)
+            return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    },
     credentials: true,
 }));
 app.use((0, cookie_parser_1.default)());

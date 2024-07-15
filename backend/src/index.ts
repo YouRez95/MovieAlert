@@ -5,7 +5,7 @@ import cors from 'cors';
 
 
 import connectToDatabse from './config/db';
-import { APP_ORIGIN, NODE_ENV, PORT } from './constants/env';
+import { APP_ORIGIN, APP_ORIGIN_WWW, NODE_ENV, PORT } from './constants/env';
 import errorHandler from './middleware/errorHandler';
 import { OK } from './constants/http';
 import authRoutes from './routes/auth.route';
@@ -21,8 +21,18 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+const allowedOrigins = [APP_ORIGIN, APP_ORIGIN_WWW]
 app.use(cors({
-  origin: APP_ORIGIN,
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+
+    return callback(null, true);
+  },
   credentials: true,
 }))
 app.use(cookieParser());
