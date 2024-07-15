@@ -96,9 +96,6 @@ export default function NewMostMovies() {
     queryKey: ["new-most"],
     queryFn: getMostAndNewMovies,
   });
-  useEffect(() => {
-    refetchUserData();
-  }, []);
 
   return (
     <>
@@ -107,8 +104,13 @@ export default function NewMostMovies() {
           <MostSearched
             text="Most Searched"
             movies={movies.mostSearchedMovie}
+            isPending={isPending}
           />
-          <MostSearched text="New Added" movies={movies.newMoviesAdded} />
+          <MostSearched
+            text="New Added"
+            movies={movies.newMoviesAdded}
+            isPending={isPending}
+          />
         </>
       )}
     </>

@@ -13,7 +13,7 @@ import { authenticate } from './middleware/authenticate';
 import userRoutes from './routes/user.route';
 import sessionRoutes from './routes/session.route';
 import moviesRoutes from './routes/movie.route';
-import client from './config/redis';
+import client, { addMovieTitleToCache } from './config/redis';
 import oauthRoutes from './routes/oauth.route';
 
 

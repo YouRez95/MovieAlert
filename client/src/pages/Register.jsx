@@ -50,9 +50,9 @@ export default function Register() {
   });
 
   return (
-    <div className="flex justify-start items-start h-[100vh]">
+    <div className="flex justify-center md:justify-start items-center min-h-[100vh] sm:h-[100vh]">
       <MoviesAnimation />
-      <div className="w-[60%] sm:px-[10vw] lg:px-[15vw]  h-full gap-10 flex flex-col justify-center">
+      <div className="w-[88%] md:w-[60%] sm:px-[10vw] lg:px-[15vw] h-full gap-10 flex flex-col justify-center my-10">
         <div className="">
           <Link
             to="/"

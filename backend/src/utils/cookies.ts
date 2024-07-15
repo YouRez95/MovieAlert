@@ -7,7 +7,7 @@ export const REFRESH_TOKEN_PATH = "/auth/refresh"
 
 // options used in both cookies
 const defaults: CookieOptions = {
-  sameSite: "none",
+  sameSite: NODE_ENV === 'production' ? "none" : "strict",
   httpOnly: true,
   secure: NODE_ENV !== 'development'
 }

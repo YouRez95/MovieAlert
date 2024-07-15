@@ -8,6 +8,7 @@ const useAuth = (opts = {}) => {
         queryKey: [AUTH],
         queryFn: getUser,
         staleTime: Infinity, // Allow us to call useAuth anywhere in our app and never gonna fetch user, return the data from the cache
+        refetchOnWindowFocus: false,
         ...opts
     })
 

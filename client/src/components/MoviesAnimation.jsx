@@ -5,7 +5,7 @@ import posterMovie3 from "../assets/poster-movie-3.png";
 
 export default function MoviesAnimation() {
   return (
-    <div className="bg-secondary-color w-[40%] sm:flex justify-between items-start h-full relative overflow-hidden hidden">
+    <div className="bg-secondary-color w-[40%] md:flex justify-between items-start h-full relative overflow-hidden hidden">
       <img
         src={backgroundHome}
         alt="background image"

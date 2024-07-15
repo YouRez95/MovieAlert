@@ -14,6 +14,7 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { aboutMovie } from "../lib/api";
 import { ImSpinner2 } from "react-icons/im";
+import { Helmet } from "react-helmet-async";
 
 export default function AboutMovie() {
   const { id, movieName } = useParams();
@@ -32,6 +33,20 @@ export default function AboutMovie() {
   return (
     <div className="container m-auto">
       <Navbar />
+
+      <Helmet>
+        <title>{movieName} Movie Review | Movie Alert</title>
+        <meta
+          name="description"
+          content={` Movie Alert | Find out the content warnings for ${movieName}.`}
+        />
+        <link
+          rel="canonical"
+          href={`${
+            import.meta.env.VITE_APP_BASE_URL
+          }/movie/${id}/${movieName.replaceAll(" ", "%20")}`}
+        />
+      </Helmet>
 
       {isPending && (
         <div className="height-screen flex items-center justify-center">

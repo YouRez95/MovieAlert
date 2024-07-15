@@ -6,60 +6,6 @@ import { RiMovie2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { getSearchMovie } from "../lib/api";
 
-const movies = [
-  "The Shawshank Redemption",
-  "The Godfather",
-  "The Dark Knight",
-  "Pulp Fiction",
-  "Forrest Gump",
-  "Inception",
-  "The Matrix",
-  "Fight Club",
-  "The Lord of the Rings: The Return of the King",
-  "The Empire Strikes Back",
-  "The Godfather Part II",
-  "The Lord of the Rings: The Fellowship of the Ring",
-  "Interstellar",
-  "Se7en",
-  "Gladiator",
-  "Jurassic Park",
-  "The Lion King",
-  "Star Wars",
-  "The Silence of the Lambs",
-  "Saving Private Ryan",
-  "The Green Mile",
-  "Braveheart",
-  "Terminator 2: Judgment Day",
-  "Schindler's List",
-  "The Usual Suspects",
-  "The Departed",
-  "Back to the Future",
-  "Alien",
-  "Aliens",
-  "Avatar",
-  "The Avengers",
-  "Titanic",
-  "Die Hard",
-  "The Prestige",
-  "The Dark Knight Rises",
-  "Mad Max: Fury Road",
-  "Whiplash",
-  "Django Unchained",
-  "The Wolf of Wall Street",
-  "The Social Network",
-  "Harry Potter and the Sorcerer's Stone",
-  "Harry Potter and the Deathly Hallows: Part 2",
-  "Spider-Man: Into the Spider-Verse",
-  "Coco",
-  "WALL-E",
-  "Finding Nemo",
-  "Toy Story",
-  "Toy Story 3",
-  "Inside Out",
-  "Up",
-];
-const moviesLowercase = movies.map((movie) => movie.toLowerCase());
-
 export default function SearchBarAuth() {
   const [searchMovie, setSearchMovie] = useState("");
   const [resultSearch, setResultSearch] = useState([]);
@@ -82,7 +28,7 @@ export default function SearchBarAuth() {
 
   return (
     <div className="mt-10 w-full flex flex-col items-center relative z-20">
-      <div className="w-[50%] relative">
+      <div className="w-[80%] max-w-[500px] relative">
         <CiSearch className="absolute left-2 top-[50%] -translate-y-[50%] w-7 h-7" />
         <input
           name="searchMovie"
@@ -103,12 +49,12 @@ export default function SearchBarAuth() {
         )}
       </div>
       {resultSearch.length > 0 && (
-        <div className="w-[49%] mt-1 bg-white shadow-md py-2 px-2 rounded-lg max-h-[37vh] overflow-y-auto absolute top-[60px]">
+        <div className="w-[80%] max-w-[500px] mt-1 bg-white shadow-md py-2 px-2 rounded-lg max-h-[37vh] overflow-y-auto absolute top-[60px]">
           {resultSearch.map((movie) => (
             <Link
               key={movie.id}
               to={`movie/${movie.id}/${movie.movieName}`}
-              className="w-full flex items-center gap-2 text-xl rounded-lg px-4 py-2 cursor-pointer hover:bg-slate-200 border-b"
+              className="w-full flex items-center gap-2 text-base sm:text-xl rounded-lg px-4 py-2 cursor-pointer hover:bg-slate-200 border-b"
             >
               <RiMovie2Line className="primary-color" />
               <span>{movie.movieName}</span>

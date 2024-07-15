@@ -6,7 +6,7 @@ const date_1 = require("./date");
 exports.REFRESH_TOKEN_PATH = "/auth/refresh";
 // options used in both cookies
 const defaults = {
-    sameSite: "none",
+    sameSite: env_1.NODE_ENV === 'production' ? "none" : "strict",
     httpOnly: true,
     secure: env_1.NODE_ENV !== 'development'
 };

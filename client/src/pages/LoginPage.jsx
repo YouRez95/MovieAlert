@@ -8,6 +8,7 @@ import MoviesAnimation from "../components/MoviesAnimation";
 import { login } from "../lib/api";
 import { isEmail } from "../utils/isEmail";
 import getGoogleOAuthURL from "../utils/getGoogleUrl";
+import queryClient from "../config/queryClient";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -20,14 +21,15 @@ export default function LoginPage() {
     isError,
   } = useMutation({
     mutationFn: login,
-    onSuccess: () => {
+    onSuccess: async () => {
+      await queryClient.cancelQueries();
       navigate("/", { replace: true });
     },
   });
 
   return (
-    <div className="flex justify-start items-start h-[100vh]">
-      <div className="w-[60%] sm:px-[10vw] lg:px-[15vw]  h-full gap-10 flex flex-col justify-center">
+    <div className="flex justify-center md:justify-start items-center min-h-[100vh] sm:h-[100vh]">
+      <div className="w-[88%] md:w-[60%] sm:px-[10vw] lg:px-[15vw]  h-full gap-10 flex flex-col justify-center my-10">
         <div className="">
           <Link
             to="/"
@@ -37,7 +39,7 @@ export default function LoginPage() {
             <span>Back</span>
           </Link>
           <h2 className="text-3xl font-primary">Welcome Back</h2>
-          <p className="font-secondary text-[#384154]">
+          <p className="font-secondary text-[#384154] text-[12px]">
             Movie alert provides check for content warning in movie before
             watching, that help us to decide if a good t watch a movie by me
             self or with my family or not

@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
-import { MONGO_URI } from '../constants/env';
+import { NODE_ENV, MONGO_LOCAL, MONGO_CLOUD} from '../constants/env';
+
+const MONGO_URI = NODE_ENV === 'development' ? MONGO_LOCAL : MONGO_CLOUD
 
 const connectToDatabse = async () => {
   try {
