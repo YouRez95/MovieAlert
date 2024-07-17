@@ -11,7 +11,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <HelmetProvider>
     <Helmet>
       <title>MovieAlert: Check movies for content warnings</title>
-      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/logo16.png" />
       <link rel="icon" type="image/png" sizes="32x32" href="/logo32.png" />

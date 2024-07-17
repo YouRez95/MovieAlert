@@ -3,11 +3,11 @@ import catchErrors from "../utils/catchErrors";
 // import { uploadFile } from "../config/s3";
 
 import appAssert from "../utils/appAssert";
-import { BAD_REQUEST, INTERNAL_SERVER_ERROR, NOT_FOUND, OK } from "../constants/http";
-import uploadToS3 from "../config/s3";
-import { addMovie, editMovie, getMostSearchedMovies, getMovie } from "../services/movie.service";
+import { BAD_REQUEST, CREATED, INTERNAL_SERVER_ERROR, NOT_FOUND, OK } from "../constants/http";
+import uploadToS3, { deleteFromS3 } from "../config/s3";
+import { addMovie, deleteMovie, editMovie, getMostSearchedMovies, getMovie } from "../services/movie.service";
 import { aboutMovieSchema, movieSchema, movieTitleSchema } from "../utils/zod";
-import { searchMovieTitle } from "../config/redis";
+import { deleteFromCache, movieIsMember, searchMovieTitle } from "../config/redis";
 import MovieModel from "../models/movie.model";
 import SearchLogModel from "../models/searchLog.model";
 
@@ -23,7 +23,7 @@ export const addMovieHandler = catchErrors(async (req, res) => {
   // Call the service
   const result = await addMovie({ ...movieData, file, userId})
 
-  return res.status(OK).json({message: 'movie created'});
+  return res.status(CREATED).json({message: 'movie created'});
 })
 
 
@@ -56,8 +56,7 @@ export const mostAndNewMovieHandler = catchErrors(async (req, res) => {
   // get the most searched movie
   const {mostSearchedMovie, newMoviesAdded} = await getMostSearchedMovies()
 
-
-  return res.json({mostSearchedMovie, newMoviesAdded});
+  return res.status(OK).json({mostSearchedMovie, newMoviesAdded});
 })
 
 
@@ -72,7 +71,7 @@ export const myMoviesHandler = catchErrors(async (req, res) => {
   const movies = await MovieModel.find({userId: req.userId}).sort({createdAt: -1}).limit(maxMovies).skip((page - 1) * maxMovies).select('_id picture title');
 
   // return response
-  res.json({countMovies, movies})
+  res.status(OK).json({countMovies, movies})
 })
 
 
@@ -87,7 +86,7 @@ export const myViewsHandler = catchErrors(async (req, res) => {
   const movies = await SearchLogModel.find({userId: req.userId}).sort({createdAt: -1}).limit(maxMovies).skip((page - 1) * maxMovies).select('movieId').populate('movieId', '_id picture title');
 
   // return response
-  res.json({countMovies, movies})
+  res.status(OK).json({countMovies, movies})
 })
 
 export const updateMovieHandler = catchErrors(async (req, res) => {
@@ -100,5 +99,17 @@ export const updateMovieHandler = catchErrors(async (req, res) => {
 
   // Call the service
   await editMovie({...movieData, file, userId, id, movieName})
-  res.json({message: 'Updated Success'})
+  res.status(OK).json({message: 'Updated Success'})
+})
+
+
+export const deleteMovieHandler = catchErrors(async (req, res) => {
+  // validate title
+  const { movieId, movieName } = aboutMovieSchema.parse({movieId: req.params.id, movieName: req.params.title})
+
+  // Call the service
+  await deleteMovie({movieId, movieName, userId: req.userId})
+
+  // Return the response
+  res.status(OK).json({message: "Movie deleted"});
 })

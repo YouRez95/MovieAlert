@@ -189,3 +189,28 @@ export const editMovie = async ({title, year,  genre, description, contentWarnin
 
   return {...updatedMovie.toObject()};
 }
+
+type deleteMovieParams = {
+  movieId: string;
+  movieName: string;
+  userId: mongoose.Types.ObjectId,
+}
+
+export const deleteMovie = async ({movieId, movieName, userId}: deleteMovieParams) => {
+  // Check if the movie exist on the cache
+  const { result } = await movieIsMember(`${movieId}:${movieName}`)
+  appAssert(result, NOT_FOUND, 'Movie not found');
+
+  // delete movie from db
+  const deletedMovie = await MovieModel.findOneAndDelete({userId, _id: movieId, title: movieName});
+  appAssert(deletedMovie, NOT_FOUND, 'Movie not found or you are not the owner');
+
+  // Delete the movie from search log
+  await SearchLogModel.deleteMany({movieId: deletedMovie._id});
+
+  // Delete the movie from aws
+
+  await deleteFromS3(deletedMovie.picture);
+  // Delete the movie from the cache
+  await deleteFromCache(deletedMovie.title, String(deletedMovie._id));
+} 

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { aboutMovieHandler, addMovieHandler, mostAndNewMovieHandler, myMoviesHandler, myViewsHandler, searchMovieHandler, updateMovieHandler } from "../controllers/movie.controller";
+import { aboutMovieHandler, addMovieHandler, deleteMovieHandler, mostAndNewMovieHandler, myMoviesHandler, myViewsHandler, searchMovieHandler, updateMovieHandler } from "../controllers/movie.controller";
 import upload from "../config/multer";
 
 const moviesRoutes = Router();
@@ -13,6 +13,9 @@ moviesRoutes.get('/most/new', mostAndNewMovieHandler)
 moviesRoutes.get('/myMovies', myMoviesHandler)
 moviesRoutes.get('/myViews', myViewsHandler)
 moviesRoutes.put('/update/:id/:title',upload.single('movieImage'), updateMovieHandler)
+moviesRoutes.delete('/:id')
+moviesRoutes.delete('/:id/:title', deleteMovieHandler)
+
 
 
 export default moviesRoutes;

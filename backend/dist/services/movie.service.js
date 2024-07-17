@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.editMovie = exports.getMostSearchedMovies = exports.getMovie = exports.addMovie = void 0;
+exports.deleteMovie = exports.editMovie = exports.getMostSearchedMovies = exports.getMovie = exports.addMovie = void 0;
 const s3_1 = __importStar(require("../config/s3"));
 const http_1 = require("../constants/http");
 const movie_model_1 = __importDefault(require("../models/movie.model"));
@@ -169,3 +169,18 @@ const editMovie = async ({ title, year, genre, description, contentWarning, file
     return { ...updatedMovie.toObject() };
 };
 exports.editMovie = editMovie;
+const deleteMovie = async ({ movieId, movieName, userId }) => {
+    // Check if the movie exist on the cache
+    const { result } = await (0, redis_1.movieIsMember)(`${movieId}:${movieName}`);
+    (0, appAssert_1.default)(result, http_1.NOT_FOUND, 'Movie not found');
+    // delete movie from db
+    const deletedMovie = await movie_model_1.default.findOneAndDelete({ userId, _id: movieId, title: movieName });
+    (0, appAssert_1.default)(deletedMovie, http_1.NOT_FOUND, 'Movie not found or you are not the owner');
+    // Delete the movie from search log
+    await searchLog_model_1.default.deleteMany({ movieId: deletedMovie._id });
+    // Delete the movie from aws
+    await (0, s3_1.deleteFromS3)(deletedMovie.picture);
+    // Delete the movie from the cache
+    await (0, redis_1.deleteFromCache)(deletedMovie.title, String(deletedMovie._id));
+};
+exports.deleteMovie = deleteMovie;

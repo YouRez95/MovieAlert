@@ -27,14 +27,17 @@ export default function Profile() {
 
         <div className="mt-10 gap-20 flex flex-col items-center">
           <div className="flex flex-col items-center">
-            <img
-              className="w-[100px] rounded-full"
-              src={
-                user.picture ||
-                "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.2113030492.1720396800&semt=sph"
-              }
-              alt=""
-            />
+            {user.picture ? (
+              <img
+                className="w-[100px] rounded-full"
+                src={user.picture}
+                alt="user profile"
+              />
+            ) : (
+              <span className="w-[100px] h-[100px] font-primary text-5xl grid place-items-center secondary-color bg-primary-color rounded-full">
+                {user.firstName.slice(0, 1).toUpperCase()}
+              </span>
+            )}
             <div className="grid gap-2 text-center">
               <p className="font-primary">{user.firstName}</p>
               <p className="font-secondary">
@@ -55,7 +58,7 @@ export default function Profile() {
               </p>
             </div>
           </div>
-          <div className="flex gap-14 items-center max-w-[70vw] w-full justify-center border-b-[1px] font-secondary border-[#14213d36]">
+          <div className="flex gap-6 md:gap-14  items-center w-fit md:max-w-[70vw] justify-center border-b-[1px] font-secondary border-[#14213d36]">
             <span
               className={`${
                 active === "profile"

@@ -15,4 +15,6 @@ moviesRoutes.get('/most/new', movie_controller_1.mostAndNewMovieHandler);
 moviesRoutes.get('/myMovies', movie_controller_1.myMoviesHandler);
 moviesRoutes.get('/myViews', movie_controller_1.myViewsHandler);
 moviesRoutes.put('/update/:id/:title', multer_1.default.single('movieImage'), movie_controller_1.updateMovieHandler);
+moviesRoutes.delete('/:id');
+moviesRoutes.delete('/:id/:title', movie_controller_1.deleteMovieHandler);
 exports.default = moviesRoutes;

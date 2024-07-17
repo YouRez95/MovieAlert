@@ -5,7 +5,6 @@ import { useMutation } from "@tanstack/react-query";
 import { logout } from "../lib/api";
 import queryClient from "../config/queryClient";
 import { BiCameraMovie } from "react-icons/bi";
-import { CiMenuKebab } from "react-icons/ci";
 import { CgMenuGridO } from "react-icons/cg";
 import { IoIosAdd } from "react-icons/io";
 import { LiaSignOutAltSolid } from "react-icons/lia";
@@ -37,12 +36,10 @@ export default function Navbar() {
         </Link>
       </h1>
       <div className="hidden md:flex gap-10 items-center secondary-color">
-        <button className="relative w-fit">
+        <button className="relative w-fit group">
           <div className="h-[1.5px] bg-secondary-color absolute bottom-0 w-full" />
-          <Link
-            to="/add-movie"
-            className="font-secondary capitalize px-1 py-3 "
-          >
+          <div className="h-[4px] bg-secondary-color absolute bottom-0 w-0 group-hover:w-full transition-all" />
+          <Link to="/add-movie" className="font-secondary capitalize px-1 py-3">
             add movie..
           </Link>
         </button>
@@ -78,7 +75,13 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className="relative block md:hidden">
+      <div className="relative flex items-center gap-3 md:hidden">
+        {user && (
+          <div className="flex text-xl items-center justify-center font-secondary bg-secondary-color primary-color px-2 rounded-md">
+            <BiCameraMovie className="w-6 h-6" />
+            <span className="">{user?.badge * 10 - user?.moviesViewed}</span>
+          </div>
+        )}
         <CgMenuGridO
           className="w-10 h-10 cursor-pointer"
           onClick={() => setOpenMenu((prev) => !prev)}
@@ -86,13 +89,8 @@ export default function Navbar() {
 
         {openMenu && (
           <div className="absolute top-full mt-3 rounded-full border bg-white w-fit h-fit right-0 z-50 shadow-lg flex flex-col items-center justify-center gap-4 p-2">
-            {user && (
-              <div className="flex flex-col text-xl items-center justify-center w-[55px] h-[55px] font-secondary bg-secondary-color primary-color rounded-full">
-                <BiCameraMovie className="w-9 h-9 mt-[1.5px]" />
-                {user?.badge * 10 - user?.moviesViewed}
-              </div>
-            )}
-            <div className="font-secondary rounded-full w-[55px] h-[55px]">
+            <div className="font-secondary rounded-full w-[40px] h-[40px]">
+              {" "}
               <Link to={`/profile`}>
                 {!user.picture && (
                   <span className="w-full h-full flex justify-center items-center bg-gray-200 rounded-full font-primary text-xl">
@@ -108,13 +106,13 @@ export default function Navbar() {
                 )}
               </Link>
             </div>
-            <button className="rounded-full w-[55px] h-[55px] p-3 bg-primary-color">
+            <button className="rounded-full w-[40px] h-[40px] p-1 bg-primary-color">
               <Link to="/add-movie" className="">
                 <IoIosAdd className="w-full h-full" />
               </Link>
             </button>
             <button
-              className="rounded-full w-[55px] h-[55px] p-3 bg-primary-color"
+              className="rounded-full w-[40px] h-[40px] p-1 bg-primary-color"
               onClick={signOut}
             >
               <LiaSignOutAltSolid className="w-full h-full" />

@@ -5,18 +5,18 @@ import badge3 from "../assets/Badge_03.png";
 import badge4 from "../assets/Badge_04.png";
 
 const BADGES = [
-  { id: 1, badge: badge1, level: "Amateur" },
-  { id: 2, badge: badge2, level: "Intermediate" },
-  { id: 3, badge: badge3, level: "Advanced" },
-  { id: 4, badge: badge4, level: "Expert" },
+  { id: 1, badge: badge1, level: "Basic" },
+  { id: 2, badge: badge2, level: "Bronze" },
+  { id: 3, badge: badge3, level: "Silver" },
+  { id: 4, badge: badge4, level: "Gold" },
 ];
 
 export default function ProfileMe() {
   const { user } = useAuth();
 
   return (
-    <div className="w-full flex flex-col gap-5 items-center">
-      <div className="flex gap-10 items-center w-[60%]">
+    <div className="w-[90vw] sm:w-fit md:w-full flex flex-col gap-5 items-center">
+      <div className="grid grid-cols-3 gap-4 items-center w-full md:w-[60%]">
         <label htmlFor="email" className="font-primary flex-1">
           Email:
         </label>
@@ -25,11 +25,11 @@ export default function ProfileMe() {
           id="email"
           disabled
           placeholder={user.email}
-          className="border px-2 py-1 font-secondary flex-1"
+          className="border px-2 py-1 font-secondary flex-1 col-span-2"
         />
       </div>
-      <div className="flex gap-10 items-center w-[60%]">
-        <label htmlFor="email" className="font-primary flex-1">
+      <div className="grid grid-cols-3 gap-4 items-center w-full md:w-[60%]">
+        <label htmlFor="email" className="font-primary">
           First name:
         </label>
         <input
@@ -37,11 +37,11 @@ export default function ProfileMe() {
           id="email"
           disabled
           placeholder={user.firstName}
-          className="border px-2 py-1 font-secondary flex-1"
+          className="border px-2 py-1 font-secondary col-span-2"
         />
       </div>
-      <div className="flex gap-10 items-center w-[60%]">
-        <label htmlFor="email" className="font-primary flex-1">
+      <div className="grid grid-cols-3 gap-4 items-center w-full md:w-[60%]">
+        <label htmlFor="email" className="font-primary">
           Last name:
         </label>
         <input
@@ -49,11 +49,11 @@ export default function ProfileMe() {
           id="email"
           disabled
           placeholder={user.lastName}
-          className="border px-2 py-1 font-secondary flex-1"
+          className="border px-2 py-1 font-secondary col-span-2"
         />
       </div>
-      <div className="flex gap-10 items-center w-[60%]">
-        <label htmlFor="email" className="font-primary flex-1">
+      <div className="grid grid-cols-3 gap-4 items-center w-full md:w-[60%]">
+        <label htmlFor="email" className="font-primary">
           Movies viewed:
         </label>
         <input
@@ -61,11 +61,11 @@ export default function ProfileMe() {
           id="email"
           disabled
           placeholder={user.moviesViewed}
-          className="border px-2 py-1 font-secondary flex-1"
+          className="border px-2 py-1 font-secondary col-span-2"
         />
       </div>
-      <div className="flex gap-10 items-center w-[60%]">
-        <label htmlFor="email" className="font-primary flex-1">
+      <div className="grid grid-cols-3 gap-4 items-center w-full md:w-[60%]">
+        <label htmlFor="email" className="font-primary">
           Movies submitted:
         </label>
         <input
@@ -73,13 +73,13 @@ export default function ProfileMe() {
           id="email"
           disabled
           placeholder={user.moviesSubmitted}
-          className="border px-2 py-1 font-secondary flex-1"
+          className="border px-2 py-1 font-secondary col-span-2"
         />
       </div>
 
-      <div className="flex gap-10 items-center w-[60%]">
-        <span className="font-primary flex-1">Badges:</span>
-        <div className="font-secondary flex-1 flex gap-1">
+      <div className="grid grid-cols-3 gap-4 items-center w-full md:w-[60%]">
+        <span className="font-primary">Badges:</span>
+        <div className="font-secondary col-span-2 flex gap-1">
           {BADGES.slice(0, user.badge).map((badge) => (
             <div
               key={badge.id}

@@ -28,11 +28,11 @@ export default function MoviesViewed() {
       {isSuccess && movies.countMovies > 0 && (
         <div className="">
           {/* Movies */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-3 px-10 mt-9">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 px-10 mt-9">
             {movies.movies.map((movie) => (
               <div
                 key={movie._id}
-                className="cursor-pointer transition-all duration-300 relative group h-[300px] w-[200px]"
+                className="cursor-pointer transition-all duration-300 relative group"
               >
                 <div className="absolute w-full gap-4 flex items-center justify-center rounded-md h-full bg-[#14213d8f] opacity-0 group-hover:opacity-100 transition-all duration-300">
                   <Link

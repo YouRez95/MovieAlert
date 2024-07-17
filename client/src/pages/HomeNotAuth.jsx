@@ -15,10 +15,11 @@ import badge3 from "../assets/Badge_03.png";
 import badge4 from "../assets/Badge_04.png";
 import Footer from "../components/Footer";
 import logo from "../assets/logo.png";
+import frame from "../assets/Frame.png";
 
 export default function HomeNotAuth() {
   return (
-    <main>
+    <main className="min-h-[100vh] flex flex-col justify-between">
       <Helmet>
         <title>MovieAlert - Know the Content Warnings before you watch</title>
         <meta
@@ -28,11 +29,12 @@ export default function HomeNotAuth() {
         <link rel="canonical" href={import.meta.env.VITE_APP_BASE_URL} />
       </Helmet>
       <div className="w-full h-[350px] md:h-[480px] relative overflow-hidden">
-        <img
+        {/* <img
           src={backgroundHome}
           alt="background image"
           className="absolute top-0 bottom-0 h-full w-full"
         />
+        
 
         <div className="absolute sm:left-[10vw] flex justify-between left-[50%] translate-x-[-50%] sm:translate-x-0 items-center h-full sm:right-[10vw] z-0">
           <img
@@ -50,7 +52,13 @@ export default function HomeNotAuth() {
             alt="poster movie"
             className="w-[300px] h-[424px] rounded-lg hidden sm:block"
           />
-        </div>
+        </div> */}
+
+        <img
+          src={frame}
+          alt=""
+          className="object-cover absolute w-full h-full"
+        />
 
         <div className="bg-gradient-to-b from-[#14213d] via-[#14213d9c] from-10% to-[#3558a353] w-full h-full absolute" />
         <Layout>

@@ -30,12 +30,12 @@ export default function SessionCard({ session }) {
         <span className="font-secondary text-sm">{userAgent}</span>
       </div>
       {!isCurrent ? (
-        <div className="">
+        <div className="bg-red-200 border p-1">
           {isPending ? (
-            <ImSpinner8 className={`w-8 h-8 bg-red-200 border animate-spin`} />
+            <ImSpinner8 className={`w-6 h-6 animate-spin`} />
           ) : (
             <HiMiniXMark
-              className={`w-8 h-8 bg-red-200 border cursor-pointer`}
+              className={`w-8 h-8 cursor-pointer`}
               onClick={() => handleDeleteSession(_id)}
             />
           )}

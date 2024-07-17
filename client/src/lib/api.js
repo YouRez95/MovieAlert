@@ -16,3 +16,4 @@ export const getMoviesHistory = async (page) => API.get(`/movies/myViews?page=${
 export const editMovie = async ({formData, id, movieName}) => API.put(`/movies/update/${id}/${movieName}`, formData)
 export const getMysessions = async () => API.get('/sessions')
 export const deleteSession = async (id) => API.delete(`/sessions/${id}`)
+export const deleteMovie = async ({id, title}) => API.delete(`/movies/${id}/${title}`)
