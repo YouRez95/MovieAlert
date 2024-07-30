@@ -5,7 +5,7 @@ import SessionModel from "../models/session.model";
 import UserModel from "../models/user.model"
 import VerificationCodeModel from "../models/verificationCode.model";
 import { ONE_DAY_MS, fiveMinuteAgo, oneHourFromNow, oneYearFromNow, thirtyDaysFromNow } from "../utils/date";
-import { getVerifyEmailTemplate, getPasswordResetTemplate } from "../utils/emailTemplates";
+import { getVerifyEmailTemplate, getPasswordResetTemplate, getAccountAccessAlertTemplate } from "../utils/emailTemplates";
 import { APP_ORIGIN, JWT_REFRESH_SECRET, JWT_SECRET } from '../constants/env';
 import appAssert from '../utils/appAssert';
 import { CONFLICT, INTERNAL_SERVER_ERROR, NOT_FOUND, TOO_MANY_REQUESTS, UNAUTHORIZED } from '../constants/http';
@@ -94,6 +94,19 @@ export const loginUser = async ({email, password, userAgent}: LoginParams) => {
   appAssert(isValid, UNAUTHORIZED, 'Invalid email or password');
 
   const userId = user._id;
+
+  // 
+  const sessionFound = await SessionModel.findOne({userId});
+  if (sessionFound && sessionFound?.userAgent !== userAgent) {
+    const { error } = await sendMail({
+      to: user.email,
+      ...getAccountAccessAlertTemplate(userAgent)
+    })
+  
+    if (error) {
+      console.log(error);
+    }
+  }
 
   // Create the session
   const session = await SessionModel.create({

@@ -75,7 +75,7 @@ export default function EditMovie() {
     mutationFn: editMovie,
     onSuccess: () => {
       setTimeout(() => {
-        navigate("/profile");
+        navigate(-1);
       }, 2000);
     },
   });

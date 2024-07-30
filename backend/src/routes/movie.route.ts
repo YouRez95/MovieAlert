@@ -13,7 +13,6 @@ moviesRoutes.get('/most/new', mostAndNewMovieHandler)
 moviesRoutes.get('/myMovies', myMoviesHandler)
 moviesRoutes.get('/myViews', myViewsHandler)
 moviesRoutes.put('/update/:id/:title',upload.single('movieImage'), updateMovieHandler)
-moviesRoutes.delete('/:id')
 moviesRoutes.delete('/:id/:title', deleteMovieHandler)
 
 

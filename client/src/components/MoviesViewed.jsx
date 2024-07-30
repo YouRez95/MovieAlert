@@ -73,6 +73,12 @@ export default function MoviesViewed() {
           )}
         </div>
       )}
+
+      {isSuccess && movies.countMovies === 0 && (
+        <div className="text-center my-10 font-secondary-bold">
+          No movie Found
+        </div>
+      )}
     </div>
   );
 }

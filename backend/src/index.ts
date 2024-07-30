@@ -9,12 +9,14 @@ import { APP_ORIGIN, APP_ORIGIN_WWW, NODE_ENV, PORT } from './constants/env';
 import errorHandler from './middleware/errorHandler';
 import { OK } from './constants/http';
 import authRoutes from './routes/auth.route';
-import { authenticate } from './middleware/authenticate';
+import { authenticate, isAdmin } from './middleware/authenticate';
 import userRoutes from './routes/user.route';
 import sessionRoutes from './routes/session.route';
 import moviesRoutes from './routes/movie.route';
 import client, { addMovieTitleToCache } from './config/redis';
 import oauthRoutes from './routes/oauth.route';
+import demoRoutes from './routes/demo.route';
+import adminRoutes from './routes/admin.route';
 
 
 const app = express();
@@ -46,13 +48,15 @@ app.get('/', (req, res, next) => {
 
 // Route for auth
 app.use('/auth', authRoutes);
+app.use('/oauth', oauthRoutes);
+
+app.use('/demo', demoRoutes);
 
 // protectedRoutes
 app.use('/user', authenticate, userRoutes);
-
 app.use('/sessions', authenticate, sessionRoutes);
 app.use('/movies', authenticate, moviesRoutes);
-app.use('/oauth', oauthRoutes);
+app.use('/admin', authenticate, isAdmin, adminRoutes)
 
 // Error Middleware
 app.use(errorHandler);

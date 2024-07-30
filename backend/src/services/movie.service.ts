@@ -160,8 +160,14 @@ type MovieDataUpdatedType = {
 export const editMovie = async ({title, year,  genre, description, contentWarning, file, userId, id, movieName}: MovieDataUpdatedType) => {
 
   // find the movie
-  const movie = await MovieModel.findOne({_id: id, title: movieName, userId});
+  const movie = await MovieModel.findOne({_id: id, title: movieName});
   appAssert(movie, NOT_FOUND, 'Movie not found');
+
+  // Check if the user is not owner of the movie and is admin
+  if (movie.userId !== userId) {
+    const user = await UserModel.findById(userId);
+    appAssert(user?.role === 'admin', UNAUTHORIZED, 'Not Authorized to modify')
+  }
 
   // Checking for new file
   if (file) {
@@ -202,15 +208,21 @@ export const deleteMovie = async ({movieId, movieName, userId}: deleteMovieParam
   appAssert(result, NOT_FOUND, 'Movie not found');
 
   // delete movie from db
-  const deletedMovie = await MovieModel.findOneAndDelete({userId, _id: movieId, title: movieName});
+  const user = await UserModel.findById(userId);
+  let deletedMovie;
+  if (user?.role === 'admin') {
+    deletedMovie = await MovieModel.findOneAndDelete({_id: movieId, title: movieName});
+  } else {
+    deletedMovie = await MovieModel.findOneAndDelete({userId, _id: movieId, title: movieName});
+  }
   appAssert(deletedMovie, NOT_FOUND, 'Movie not found or you are not the owner');
 
   // Delete the movie from search log
   await SearchLogModel.deleteMany({movieId: deletedMovie._id});
 
   // Delete the movie from aws
-
   await deleteFromS3(deletedMovie.picture);
+
   // Delete the movie from the cache
   await deleteFromCache(deletedMovie.title, String(deletedMovie._id));
 } 

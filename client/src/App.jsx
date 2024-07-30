@@ -12,9 +12,10 @@ import NotFound from "./pages/NotFound";
 import VerifyEmail from "./pages/VerifyEmail";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
-import { useEffect } from "react";
-import { refetchUserData } from "./utils/auth";
 import EditMovie from "./pages/EditMovie";
+import DemoAboutMovie from "./pages/DemoAboutMovie";
+import DashboardAdmin from "./pages/DashboardAdmin";
+import ProtectedAdmin from "./components/ProtectedAdmin";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       { path: "/register", element: <Register /> },
       { path: "/password/forgot", element: <ForgotPassword /> },
       { path: "/password/reset", element: <ResetPassword /> },
+      { path: "/demo/:id/:title", element: <DemoAboutMovie /> },
     ],
   },
   {
@@ -39,6 +41,11 @@ const router = createBrowserRouter([
       { path: "/add-movie", element: <AddMovie /> },
       { path: "/edit-movie/:id/:movieName", element: <EditMovie /> },
       { path: "/movie/:id/:movieName", element: <AboutMovie /> },
+      {
+        path: "/dashboard",
+        element: <ProtectedAdmin />,
+        children: [{ index: true, element: <DashboardAdmin /> }],
+      },
     ],
   },
   {
@@ -52,9 +59,5 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  // useEffect(() => {
-  //   refetchUserData();
-  // }, []);
-
   return <RouterProvider router={router} />;
 }

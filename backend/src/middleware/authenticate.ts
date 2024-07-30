@@ -5,6 +5,7 @@ import AppErrorCode from "../constants/appErrorCode";
 import { verifyToken } from "../utils/jwt";
 import SessionModel from "../models/session.model";
 import catchErrors from '../utils/catchErrors';
+import UserModel from "../models/user.model";
 
 
 export const authenticate:RequestHandler = catchErrors(async (req, res, next) => {
@@ -23,5 +24,14 @@ export const authenticate:RequestHandler = catchErrors(async (req, res, next) =>
   // Store the user on the request
   req.userId = payload.userId;
   req.sessionId = payload.sessionId;
+  next();
+})
+
+
+export const isAdmin:RequestHandler = catchErrors(async (req, res, next) => {
+  const userId = req.userId;
+  const user = await UserModel.findById(userId);
+
+  appAssert(user?.role === "admin", UNAUTHORIZED, "Unauthorized");
   next();
 })

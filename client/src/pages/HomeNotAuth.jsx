@@ -1,14 +1,12 @@
 import { Link } from "react-router-dom";
-import backgroundHome from "../assets/home_one-back.png";
-import posterMovie1 from "../assets/poster-movie-1.png";
-import posterMovie2 from "../assets/poster-movie-2.png";
-import posterMovie3 from "../assets/poster-movie-3.png";
+import { RiMovie2Line } from "react-icons/ri";
 import Layout from "../components/Layout";
 import { IoSearch } from "react-icons/io5";
 import { Helmet } from "react-helmet-async";
 import { FaUserCheck } from "react-icons/fa6";
 import CardProcess from "../components/CardProcess";
 import { BiSolidCameraMovie } from "react-icons/bi";
+import { useMutation } from "@tanstack/react-query";
 import badge1 from "../assets/Badge_01.png";
 import badge2 from "../assets/Badge_02.png";
 import badge3 from "../assets/Badge_03.png";
@@ -16,8 +14,41 @@ import badge4 from "../assets/Badge_04.png";
 import Footer from "../components/Footer";
 import logo from "../assets/logo.png";
 import frame from "../assets/Frame.png";
+import { getSearchMovieDemo } from "../lib/api";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { v4 as uuidv4 } from "uuid";
 
 export default function HomeNotAuth() {
+  const [moviesSearchResult, setMoviesSearchResult] = useState([]);
+
+  const { mutate: mutateSearch } = useMutation({
+    mutationFn: getSearchMovieDemo,
+    onSuccess: (data) => {
+      setMoviesSearchResult(data);
+    },
+  });
+
+  useEffect(() => {
+    function addCokies() {
+      const user_id = Cookies.get("user_id");
+      if (!user_id) {
+        Cookies.set("user_id", uuidv4());
+      }
+    }
+
+    addCokies();
+  }, []);
+
+  function searchMovie(event) {
+    const value = event.target.value;
+    if (value.length > 0) {
+      mutateSearch(value);
+    } else {
+      setMoviesSearchResult([]);
+    }
+  }
+
   return (
     <main className="min-h-[100vh] flex flex-col justify-between">
       <Helmet>
@@ -28,32 +59,8 @@ export default function HomeNotAuth() {
         />
         <link rel="canonical" href={import.meta.env.VITE_APP_BASE_URL} />
       </Helmet>
+
       <div className="w-full h-[350px] md:h-[480px] relative overflow-hidden">
-        {/* <img
-          src={backgroundHome}
-          alt="background image"
-          className="absolute top-0 bottom-0 h-full w-full"
-        />
-        
-
-        <div className="absolute sm:left-[10vw] flex justify-between left-[50%] translate-x-[-50%] sm:translate-x-0 items-center h-full sm:right-[10vw] z-0">
-          <img
-            src={posterMovie1}
-            alt="poster movie"
-            className="w-[300px] h-[424px] rounded-lg hidden md:block"
-          />
-          <img
-            src={posterMovie2}
-            alt="poster movie"
-            className="w-[250px] h-[350px] sm:w-[300px] sm:h-[424px] rounded-lg mt-[390px]"
-          />
-          <img
-            src={posterMovie3}
-            alt="poster movie"
-            className="w-[300px] h-[424px] rounded-lg hidden sm:block"
-          />
-        </div> */}
-
         <img
           src={frame}
           alt=""
@@ -89,17 +96,31 @@ export default function HomeNotAuth() {
           </div>
         </Layout>
       </div>
-      <div className="relative flex w-[80%] sm:w-[500px] md:w-[600px] h-[50px] sm:h-[55px] md:h-[66px] bg-red-500 m-auto -mt-6 md:-mt-9">
-        <input
-          placeholder="Search your movie"
-          className=" placeholder:text-[#14213d5a] placeholder:font-thin bg-primary-color w-[80%] h-full p-2 font-secondary outline-none text-2xl"
-          type="text"
-        />
+      <div className="relative flex w-[80%] sm:w-[500px] md:w-[600px] h-[50px] sm:h-[55px] md:h-[66px] m-auto -mt-6 md:-mt-9">
         <button className="w-[20%] bg-secondary-color flex items-center justify-center">
           <IoSearch fontSize={40} color="#FCA311" />
         </button>
+        <input
+          placeholder="Search your movie"
+          className="placeholder:text-[#14213d5a] capitalize placeholder:font-thin bg-primary-color w-[80%] h-full p-2 font-secondary outline-none text-2xl"
+          type="text"
+          onChange={searchMovie}
+        />
+        {moviesSearchResult.length > 0 && (
+          <div className="w-full z-10 mt-1 bg-white shadow-md py-2 px-2 rounded-lg max-h-[37vh] overflow-y-auto absolute top-full">
+            {moviesSearchResult.map((movie) => (
+              <Link
+                key={movie.id}
+                to={`/demo/${movie.id}/${movie.movieName}`}
+                className="w-full flex items-center gap-2 text-base sm:text-xl rounded-lg px-4 py-2 cursor-pointer hover:bg-slate-200 border-b"
+              >
+                <RiMovie2Line className="primary-color" />
+                <span>{movie.movieName}</span>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
-
       <Layout>
         <div className="grid grid-cols-1 md:grid-cols-2 mt-20 gap-20 px-3">
           <CardProcess
@@ -144,7 +165,6 @@ export default function HomeNotAuth() {
           />
         </div>
       </Layout>
-
       <Footer />
     </main>
   );

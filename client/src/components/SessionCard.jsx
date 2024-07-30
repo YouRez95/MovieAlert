@@ -21,7 +21,7 @@ export default function SessionCard({ session }) {
   });
 
   return (
-    <div className="w-[90%] m-auto border p-3 flex items-center gap-10 mb-4">
+    <div className="w-[90%] m-auto border p-3 flex items-center justify-between gap-10 mb-4">
       <div className="font-primary">
         <p>
           {new Date(createdAt).toLocaleString("en-US")}{" "}

@@ -17,3 +17,7 @@ export const editMovie = async ({formData, id, movieName}) => API.put(`/movies/u
 export const getMysessions = async () => API.get('/sessions')
 export const deleteSession = async (id) => API.delete(`/sessions/${id}`)
 export const deleteMovie = async ({id, title}) => API.delete(`/movies/${id}/${title}`)
+export const getSearchMovieDemo = async (title) => API.get(`/demo/search/${title}`);
+export const aboutMovieDemo = async ({id, title, user_id}) => API.post(`demo/about/${id}/${title}`, {user_id});
+export const getmoviesAdmin = async({page, max, order}) => API.get(`/admin/movies?page=${page}&max=${max}&sort=${order}`);
+export const getUsersAdmin = async({page, max, order}) => API.get(`/admin/users?page=${page}&max=${max}&sort=${order}`);

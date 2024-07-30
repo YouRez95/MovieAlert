@@ -36,6 +36,18 @@ export default function Navbar() {
         </Link>
       </h1>
       <div className="hidden md:flex gap-10 items-center secondary-color">
+        {user.role === "admin" && (
+          <button className="relative w-fit group">
+            <div className="h-[1.5px] bg-secondary-color absolute bottom-0 w-full" />
+            <div className="h-[4px] bg-secondary-color absolute bottom-0 w-0 group-hover:w-full transition-all" />
+            <Link
+              to="/dashboard"
+              className="font-secondary capitalize px-1 py-3"
+            >
+              Dashboard
+            </Link>
+          </button>
+        )}
         <button className="relative w-fit group">
           <div className="h-[1.5px] bg-secondary-color absolute bottom-0 w-full" />
           <div className="h-[4px] bg-secondary-color absolute bottom-0 w-0 group-hover:w-full transition-all" />
@@ -44,9 +56,9 @@ export default function Navbar() {
           </Link>
         </button>
         {user && (
-          <div className="flex gap-1 font-secondary bg-secondary-color primary-color px-2 rounded-md">
+          <div className="flex gap-1 bg-secondary-color primary-color px-2 rounded-md font-primary">
             <BiCameraMovie className="w-5 h-5 mt-[1.5px]" />
-            {user?.badge * 10 - user?.moviesViewed}
+            {user?.badge < 4 ? user?.badge * 10 - user?.moviesViewed : "Inf"}
           </div>
         )}
         <button

@@ -15,6 +15,7 @@ export interface UserDocument extends mongoose.Document {
   badge: number;
   moviesViewed: number;
   moviesSubmitted: number;
+  role: string;
   comparePassword(val: string): Promise<boolean>;
   omitPassword(): Pick<UserDocument, 'email' | 'firstName' | 'lastName' | 'verified' | 'createdAt' | 'updatedAt' | '_id' | '__v'>;
 }
@@ -57,6 +58,10 @@ const userSchema = new mongoose.Schema<UserDocument>({
     type: Number,
     default: 0
   },
+  role: {
+    type: String,
+    default: 'user'
+  }
 }, {timestamps: true});
 
 // Define Hooks on the Schema

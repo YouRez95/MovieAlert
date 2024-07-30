@@ -1,6 +1,4 @@
 import Navbar from "../components/Navbar";
-import { FaCheckCircle } from "react-icons/fa";
-import { FaXmark } from "react-icons/fa6";
 
 import {
   ROMANTIC_CONTENT,
@@ -12,10 +10,12 @@ import WarningContent from "../components/WarningContent";
 import Footer from "../components/Footer";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect } from "react";
 import { aboutMovie } from "../lib/api";
 import { ImSpinner2 } from "react-icons/im";
 import { Helmet } from "react-helmet-async";
+import queryClient from "../config/queryClient";
+import { AUTH } from "../hooks/useAuth";
 
 export default function AboutMovie() {
   const { id, movieName } = useParams();
@@ -30,6 +30,12 @@ export default function AboutMovie() {
     queryKey: ["about_movie", id, movieName],
     queryFn: () => aboutMovie(id, movieName),
   });
+
+  useEffect(() => {
+    if (isSuccess) {
+      queryClient.invalidateQueries(AUTH);
+    }
+  }, [isSuccess]);
 
   return (
     <>
