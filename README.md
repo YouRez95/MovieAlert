@@ -23,9 +23,10 @@ Login as user:
 ![Screen Shot 2024-07-31 at 12 42 35 AM](https://github.com/user-attachments/assets/1d28f4e3-4092-44e6-98e5-e1aafc35ddb1)
 ![Screen Shot 2024-07-31 at 12 42 58 AM](https://github.com/user-attachments/assets/a3031e6b-b653-48a9-bbb0-6a505b2c7c83)
 ![Screen Shot 2024-07-31 at 12 43 11 AM](https://github.com/user-attachments/assets/b8f9f4f3-82f9-4f9c-9418-77675c5af379)
-![Screen Shot 2024-07-31 at 12 43 38 AM](https://github.com/user-attachments/assets/582ef79a-f4de-45f1-bf92-4b4c287d541f)
-![Screen Shot 2024-07-31 at 12 43 58 AM](https://github.com/user-attachments/assets/a6721832-bba7-45d8-8199-3339d05a9b2c)
-![Screen Shot 2024-07-31 at 12 44 12 AM](https://github.com/user-attachments/assets/5baf2db1-f228-4add-af15-d5a89c57610e)
+![Screen Shot 2024-07-31 at 12 43 38 AM](https://github.com/user-attachments/assets/c89757c3-18c4-44fd-a493-54bad7fe3f0c)
+![Screen Shot 2024-07-31 at 12 43 58 AM](https://github.com/user-attachments/assets/299bdcda-2873-44e7-a67a-94b11b3af415)
+![Screen Shot 2024-07-31 at 12 44 12 AM](https://github.com/user-attachments/assets/1b797c7e-493a-4692-b73e-2881e9da2332)
+
 
 
 
