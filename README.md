@@ -10,47 +10,65 @@ MovieAlert prioritizes security with access tokens that expire after 15 minutes 
 
 To encourage user participation, MovieAlert implements a badge system. Users earn badges by submitting movies, which allows them to view more movies. The badge system is visually represented in the image below:
 
-![Badge System](./path/to/your/image.png)
+![Screen Shot 2024-07-12 at 12 29 52 AM](https://github.com/user-attachments/assets/faa5478e-eaeb-4a12-b81e-29bd9a9d5172)
+
 
 Additionally, there is an admin panel where administrators can view, modify, or delete any movie in the database and manage user accounts.
+
+## Pictures Of Projects
+![Screen Shot 2024-07-31 at 12 42 06 AM](https://github.com/user-attachments/assets/de50fa3b-7524-4170-b3dc-99cbb1465def)
+
+Login as user:
+
+![Screen Shot 2024-07-31 at 12 42 35 AM](https://github.com/user-attachments/assets/1d28f4e3-4092-44e6-98e5-e1aafc35ddb1)
+![Screen Shot 2024-07-31 at 12 42 58 AM](https://github.com/user-attachments/assets/a3031e6b-b653-48a9-bbb0-6a505b2c7c83)
+![Screen Shot 2024-07-31 at 12 43 11 AM](https://github.com/user-attachments/assets/b8f9f4f3-82f9-4f9c-9418-77675c5af379)
+![Screen Shot 2024-07-31 at 12 43 38 AM](https://github.com/user-attachments/assets/582ef79a-f4de-45f1-bf92-4b4c287d541f)
+![Screen Shot 2024-07-31 at 12 43 58 AM](https://github.com/user-attachments/assets/a6721832-bba7-45d8-8199-3339d05a9b2c)
+![Screen Shot 2024-07-31 at 12 44 12 AM](https://github.com/user-attachments/assets/5baf2db1-f228-4add-af15-d5a89c57610e)
+
+
+
+Login as admin:
+
+![Screen Shot 2024-07-31 at 12 44 37 AM](https://github.com/user-attachments/assets/68dd81db-2af9-46cd-a77a-9c58e4341930)
+![Screen Shot 2024-07-31 at 12 44 57 AM](https://github.com/user-attachments/assets/a4d16a25-564d-4a9a-9136-2acbb5c2a3a4)
+![Screen Shot 2024-07-31 at 12 45 12 AM](https://github.com/user-attachments/assets/97eca291-d850-4881-b17a-7887f63c8a91)
 
 ## Technologies
 
 ### Frontend
 
-- React.js
-- Tailwind CSS
-- Axios
-- TanStack (React Query)
-- React Icons
-- React Router DOM
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Axios](https://img.shields.io/badge/axios-m?style=for-the-badge)
+![TanStack (React Query)](https://img.shields.io/badge/TanStack-m?style=for-the-badge)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
 
 ### Backend
-
-- TypeScript
-- Node.js
-- Express.js
-- MongoDB
-- Zod
-- Multer
-- Mongoose
-- Bcrypt
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![Nodemon](https://img.shields.io/badge/NODEMON-%23323330.svg?style=for-the-badge&logo=nodemon&logoColor=%BBDEAD)
+![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+![Zod](https://img.shields.io/badge/zod-%233068b7.svg?style=for-the-badge&logo=zod&logoColor=white)
+![multer](https://img.shields.io/badge/multer-m?style=for-the-badge)
+![Mongoose](https://img.shields.io/badge/Mongoose-V?style=for-the-badge)
+![Bcrpt](https://img.shields.io/badge/Bcrypt-V?style=for-the-badge)
 
 ### Authentication
-
-- JSON Web Tokens (JWT)
+![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 
 ### Version Control
-
-- Git
-- GitHub
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
 ### Services
-
-- Redis
-- Resend
-- AWS S3
-- Google API
+![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)
+![Resend](https://img.shields.io/badge/Resend-Black?style=for-the-badge)
+![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Google](https://img.shields.io/badge/google_api-4285F4?style=for-the-badge&logo=google&logoColor=white)
 
 ## Key Features
 
@@ -70,109 +88,58 @@ To install and run MovieAlert locally:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/moviealert.git
+   git clone https://github.com/YouRez95/MovieAlert.git
    ```
-
-# Movie Alert
-
-## Description
-
-## Pictures Of Projects
-
-![screeeen3](https://github.com/YouRez95/quiz-generator/assets/132413620/626d7bba-d12f-4a22-85a6-4a71b7d9ea77)
-
-![screeen2](https://github.com/YouRez95/quiz-generator/assets/132413620/27b42463-4e0e-4bc2-b7d0-e637854decdf)
-
-![screeeen1](https://github.com/YouRez95/quiz-generator/assets/132413620/2a369101-979a-4d54-bdc3-f6f15fdb29e8)
-
-## Technologies
-
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![alt_text](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
-![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
-![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
-![Nodemon](https://img.shields.io/badge/NODEMON-%23323330.svg?style=for-the-badge&logo=nodemon&logoColor=%BBDEAD)
-![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
-![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101)
-![Context-API](https://img.shields.io/badge/Context--Api-000000?style=for-the-badge&logo=react)
-![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![.ENV](https://img.shields.io/badge/.ENV-VVVV?style=for-the-badge)
-![Bcrpt](https://img.shields.io/badge/Bcrypt-V?style=for-the-badge)
-![express-validator](https://img.shields.io/badge/express_validator-B?style=for-the-badge)
-![multer](https://img.shields.io/badge/multer-m?style=for-the-badge)
-
-## Key Features
-
-- **_User Authentication :_** Secure user authentication endpoints using JWT tokens.
-- **_Creating Quiz :_** User authenticated can create quiz, can be public or private
-- **_Quiz Category :_** User can select the category from the list provided, or create new category
-- **_Creating Questions :_** User authenticated can create maximun 10 questions for each quiz created
-- **_Draft Quiz :_** Users may be unable to complete a question after creating a quiz. When this occurs, the quiz is automatically considered as a draft and is added to the user's dashboard
-- **_Like Quiz :_** User can like any public quiz
-- **_Comment Quiz :_** User can comment public quiz
-- **_Play Quiz :_** User can play any public quiz
-- **_Score quiz :_** After user play the quiz the score of that quiz will be automatically added to dashboard statistique
-- **_Dashboard Statistique :_** User can see all quizzes already play and the score of each quiz
-- **_Dashboard Quizzes :_** User can update the quiz or the questions for specific quiz
-- **_Dashboard Draft :_** User can see all quiz not completed yet, and can completed any time he want
-- **_Dashboard Notifications :_** If another user likes or comments on a specific quiz, the owner of that quiz will receive a notification.
-- **_dashboard Statistique :_** User can update their username, fillname and avatar (email and password added later)
-
-## Services i am still working on : 
-
-- Unit testing
-- Responsive design
-- notifications
-- Admin Dashboard
-- Improve UI/UX
-
-## Installation
-
-1. **_Clone the Repository:_** Use the `git clone` command to clone the GitHub repository to your local machine
+2. Navigate to the project directory and install depends:
+   ```bash
+   cd MovieAlert
    ```
-    git clone https://github.com/YouRez95/quiz-generator.git
-   ```
-2. **_Install depends:_**
-
-   ```
+   ```bash
    cd backend && npm install
    ```
-
+   ```bash
+   cd client && npm install
    ```
-   cd frontend && npm install
+3. Create a .env file on the client and backend directories and add your environment variables:
+   ```bash
+   #Client
+   VITE_API_URL=http://localhost:4000
+   VITE_APP_BASE_URL=http://localhost:5173
+   VITE_GOOGLE_REDIRECT_URL=http://localhost:4000/oauth/google
+   VITE_GOOGLE_CLIENT_ID=*********
+   VITE_GOOGLE_CLIENT_SECRET=************
+   ```
+   ```bash
+   #backend
+   NODE_ENV=development || production
+   APP_ORIGIN=http://localhost:5173
+   APP_ORIGIN_WWW=http://www.localhost:5173
+   MONGO_LOCAL=mongodb://localhost:27017/movie_alert
+   MONGO_CLOUD=*************
+   JWT_SECRET=jwtsecret
+   JWT_REFRESH_SECRET=jwtrefreshsecret
+   EMAIL_SENDER=***********
+   RESEND_API_KEY=*********
+   AWS_BUCKET_NAME=******
+   AWS_BUCKET_REGION=*********
+   AWS_ACCESS_KEY=*********
+   AWS_SECRET_KEY=**********
+   GOOGLE_CLIENT_ID=***********
+   GOOGLE_CLIENT_SECRET=************
+   GOOGLE_REDIRECT_URL=http://localhost:4000/oauth/google
+   REDIS_PASSWORD=**********
+   REDIS_HOST=***********
+   ```
+1. Run the application:
+   ```bash
+   #client
+   npm run dev
+   ```
+   ```bash
+   #backend
+   npm run dev
    ```
 
-3. **_Setting up env variables:_**
+## License
 
-   i. .env on backend :
-
-   ```
-   MONGO_URL=YOUR DATABASE URI MONGODB
-
-   ## JWT access token
-
-   JWT_SECRET=YOUR JWT ACCESS TOKEN SECRET
-
-   ## NODE ENV
-
-   NODE_ENV=NODE ENV HERE
-
-   ## FRONT URL
-
-   FRONT_URL=undefined
-   ```
-
-   ii. .env on frontend :
-
-   ```
-   ## URL API : example: http://localhost:5000
-
-   VITE_BASE_URL=URL API HERE
-
-   ## URL API ENTRY : example: http://localhost:5000/api/v1
-
-   VITE_API_URL=URL API HERE/api/v1
-   ```
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
