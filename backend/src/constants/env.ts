@@ -1,13 +1,12 @@
-const getEnv = (key:string, defaultValue?:string):string => {
+const getEnv = (key: string, defaultValue?: string): string => {
   const value = process.env[key] || defaultValue;
 
   if (value === undefined) {
-    throw new Error(`Missing environment variable ${key}`)
+    throw new Error(`Missing environment variable ${key}`);
   }
 
   return value;
-}
-
+};
 
 export const NODE_ENV = getEnv("NODE_ENV", "development");
 export const PORT = getEnv("PORT", "4000");
@@ -28,3 +27,4 @@ export const GOOGLE_CLIENT_SECRET = getEnv("GOOGLE_CLIENT_SECRET");
 export const GOOGLE_REDIRECT_URL = getEnv("GOOGLE_REDIRECT_URL");
 export const REDIS_PASSWORD = getEnv("REDIS_PASSWORD");
 export const REDIS_HOST = getEnv("REDIS_HOST");
+export const REDIS_PORT = getEnv("REDIS_PORT");
